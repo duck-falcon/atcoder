@@ -1,8 +1,0 @@
-https://atcoder.jp/contests/abc246/tasks/abc246_a
-https://atcoder.jp/contests/abc246/tasks/abc246_b
-https://atcoder.jp/contests/abc246/tasks/abc246_c
-https://atcoder.jp/contests/abc246/tasks/abc246_d
-https://atcoder.jp/contests/abc246/tasks/abc246_e
-https://atcoder.jp/contests/abc246/tasks/abc246_f
-https://atcoder.jp/contests/abc246/tasks/abc246_g
-https://atcoder.jp/contests/abc246/tasks/abc246_h
