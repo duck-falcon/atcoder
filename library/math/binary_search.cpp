@@ -1,11 +1,12 @@
 // https://duck-dalcon.hatenablog.com/entry/2021/02/21/223334
-auto okcheck = [&](int mid) {
+bool okcheck(int mid)  {
     // your_code
 };
 
 int binary_search (int n) {
-  int ok_idx = n;
-  int ng_idx = -1;
+  int ok_idx = n;int ng_idx = -1;
+  // int ok_idx = -1;int ng_idx = n;
+  
   while(abs(ok_idx - ng_idx) > 1) {
     int mid = (ok_idx + ng_idx) / 2;
     if(okcheck(mid)) ok_idx = mid;
