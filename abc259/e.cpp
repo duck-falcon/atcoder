@@ -47,6 +47,36 @@ template<typename T> void pv2(vector<vector<T>> vec) {
 }
 
 int main() {
+  ll n;cin >> n;
+  unordered_map<int, P> mp;
+  unordered_map<int, int> strong;
+  set<int> pp;
+  vi nn(n+100,0);
+  rep(i,n) {
+    int m; cin >> m;
+    rep(j, m) {
+      int p,e;cin >> p >> e;
+      pp.insert(p);
+      if(e > mp[p].fi) {
+        mp[p].fi = e;
+        mp[p].se = 1;
+        strong[p] = i+1;
+      } else if (e == mp[p].fi) {
+        mp[p].se += 1;
+        strong[p] = 0;
+      }
+    }
+  }
+
+  ll cnt = 1;
+  for(auto x : pp) {
+    if(strong[x] > 0 && nn[strong[x]] == 0) {
+      nn[strong[x]] = 1;
+      cnt++;
+    }
+  }
+
+  cout << min(cnt, n) << endl;
 
   return 0;
 }

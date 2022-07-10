@@ -47,6 +47,64 @@ template<typename T> void pv2(vector<vector<T>> vec) {
 }
 
 int main() {
+  string s,t;cin >> s >> t;
+  vp ss,tt;
 
+  rep(i , s.size()) {
+    int cnt = 1;
+    int tmp = int(s.at(i));
+    if(i+1==s.size()) {
+      ss.eb(P(tmp, cnt));
+      break;
+    }
+    while(tmp == s.at(i+1)) {
+      cnt += 1;
+      i += 1;
+      if(i+1==s.size()) {
+        break;
+      }
+    }
+    ss.eb(P(tmp, cnt));
+  }
+
+  rep(i , t.size()) {
+    int cnt = 1;
+    int tmp = int(t.at(i));
+    if(i+1 == t.size()) {
+      tt.eb(P(tmp, cnt));
+      break;
+    }
+    while(tmp == t.at(i+1)) {
+      cnt += 1;
+      i += 1;
+      if(i+1 == t.size()) {
+        break;
+      }
+    }
+    tt.eb(P(tmp, cnt));
+  }
+
+  if(ss.size() != tt.size()) {
+    cout << "No" << endl;
+    return 0;
+  }
+  rep(i,ss.size()) {
+    if(ss.at(i).fi != tt.at(i).fi) {
+      cout << "No" << endl;
+      return 0;
+    }
+    if(ss.at(i).se == 1) {
+      if(tt.at(i).se != 1) {
+        cout << "No" << endl;
+        return 0;
+      }
+    }
+    else if(ss.at(i).se > tt.at(i).se) {
+      cout << "No" << endl;
+      return 0;
+    }
+  }
+  cout << "Yes" << endl;
+ 
   return 0;
 }

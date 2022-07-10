@@ -47,6 +47,9 @@ template<typename T> void pv2(vector<vector<T>> vec) {
 }
 
 int main() {
+  double a,b;int d;
+  cin >> a >> b >> d;
+  
 
   return 0;
 }

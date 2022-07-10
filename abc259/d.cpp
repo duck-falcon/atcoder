@@ -46,7 +46,65 @@ template<typename T> void pv2(vector<vector<T>> vec) {
   for(auto& v : vec) pv(v);
 }
 
+// dfs-tree
+
+// 頂点数、辺数
+int vertices,sides;
+// グラフ
+vvi maze;
+// 既に到達した点
+vi seen;
+// ある地点からの最短距離,閉路を含まない場合のみ短時間で計算可能（木など）
+vi d;
+
+const int INF = 100100101;
+int s,t;
+
+bool dfs(int x) {
+  int sz = maze.at(x).size();
+  seen.at(x) = 1;
+  
+  rep(i,sz) {
+    int nx = maze.at(x).at(i);
+    if (maze.at(x).at(i) == t) return true;
+    if(!seen.at(nx)) dfs(nx);
+  }
+  return false;
+}
+
 int main() {
+  int n;cin >> n;
+  int sx,sy,tx,ty;cin >> sx >> sy >> tx >> ty;
+  
+  vi x(n+2,0);
+  vi y(n+2,0);
+  vi r(n+2,0);
+
+  // どの円に乗っているか
+  rep(i, n) {
+    cin >> x.at(i) >> y.at(i) >> r.at(i);
+    if( (x.at(i)-sx) * (x.at(i)-sx) + (y.at(i) - sy) * (y.at(i) - sy) == r.at(i) ) s = i;
+    if( (x.at(i)-tx) * (x.at(i)-tx) + (y.at(i) - ty) * (y.at(i) - ty) == r.at(i) ) t = i;
+  }
+
+  vertices = n;
+  sides = n;
+
+  maze = vvi(vertices,vi());
+  seen = vi(vertices,0);
+  rep(i, n) {
+    rep(j, n) {
+      if(j > j) continue;
+      if((x.at(i)-x.at(j)) * (x.at(i)-x.at(j)) + (y.at(i) - y.at(j)) * (y.at(i) - y.at(j)) >= r.at(i) + r.at(j)) {
+        maze.at(i).eb(j);
+        maze.at(j).eb(i);
+      }
+    }
+  }
+
+  Yes(dfs(s));
+
+
 
   return 0;
 }
