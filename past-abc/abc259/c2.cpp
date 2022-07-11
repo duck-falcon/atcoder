@@ -14,7 +14,7 @@ using namespace std;
 #define fcout cout << fixed << setprecision(15)
 
 using ll  = long long;
-using P   = pair<int,int>;
+using P   = pair<char,int>;
 using vi  = vector<int>;
 using vvi = vector<vi>;
 using vp  = vector<P>;
@@ -27,30 +27,52 @@ template<typename T> void Yes(T flag) {
   cout << (flag ? "Yes" : "No") << endl;
 }
 
-ostream& operator<<(ostream& os, const P& p) { return os << "<" << p.fi << ","<< p.se << ">";}
-
-template<typename T>
-ostream& operator<<(ostream& os, const vector<T>& vec) {
-  os << "[";
-  for (int i = 0; i < (int)vec.size(); ++i)
-  {
-    cout << (i > 0 ? ", " : "") << vec.at(i);
-  }
-  os << "]";
-  return os;
+template<typename T> void pv(vector<T> vec) {
+  cout << "[";
+  for(auto& v : vec) { cout << v << ","; }
+  cout << "]" << endl;
 }
 
-template<typename T>
-ostream& operator<<(ostream& os, const vector<vector<T>>& vec) {
-  os << "[";
+template<>
+void pv(vector<P> vec) {
+  cout << "[";
   for(auto& v : vec) {
-    os << v << (vec.back() != v ? "," : "");
+    cout << "<" << v.fi << ","<< v.se << ">" << ",";
   }
-  os << "]";
-  return os;
+  cout << "]" << endl;
+}
+
+template<typename T> void pv2(vector<vector<T>> vec) {
+  for(auto& v : vec) pv(v);
+}
+
+vp f(const string &s) {
+  vp ans;
+  for(char c : s) {
+    if(ans.size() and ans.back().fi == c) ans.back().se++;
+    else ans.eb(P(c,1));
+  }
+  return ans;
+}
+
+bool solve() {
+  string s,t; cin >> s >> t;
+  vp sp,tp;
+  sp = f(s);tp=f(t);
+
+  if(sp.size() != tp.size()) return false;
+  rep(i, sp.size()) {
+    if(sp.at(i).fi != tp.at(i).fi) return false;
+    if(sp.at(i).se == 1) {
+        if(tp.at(i).se != 1) return false;
+    }
+    else if(sp.at(i).se > tp.at(i).se) return false;
+  }
+  return true;
 }
 
 int main() {
+  Yes(solve());
 
   return 0;
 }

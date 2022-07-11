@@ -4,9 +4,7 @@ using namespace std;
 #define orep(i,n)   for(long long i = 1; i <= (n); ++i)   // one rep
 #define drep(i,n)   for(long long i = (n)-1; i >= 0; --i) // down rep
 #define srep(i,s,t) for(long long i = (s); i < (t); ++i)  // set rep
-#define rng(x)  (x).begin(),(x).end()
-
-  // range
+#define rng(x)  (x).begin(),(x).end() // range
 #define rrng(a) (a).rbegin(),(a).rend() // reverse range
 #define isin(x,l,r) ((l) <= (x) && (x) < (r))
 #define ru(x,y) (((x)+(y)-1)/(y)) // round up
@@ -49,6 +47,10 @@ template<typename T> void pv2(vector<vector<T>> vec) {
 }
 
 int main() {
+  int n,m,x,t,d;
+  cin >> n >> m >> x >> t >> d;
+
+  cout << min(t, t-x*d+d*m) << endl;
 
   return 0;
 }

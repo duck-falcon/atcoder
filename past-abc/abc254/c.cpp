@@ -4,7 +4,9 @@ using namespace std;
 #define orep(i,n)   for(long long i = 1; i <= (n); ++i)   // one rep
 #define drep(i,n)   for(long long i = (n)-1; i >= 0; --i) // down rep
 #define srep(i,s,t) for(long long i = (s); i < (t); ++i)  // set rep
-#define rng(x)  (x).begin(),(x).end() // range
+#define rng(x)  (x).begin(),(x).end()
+
+  // range
 #define rrng(a) (a).rbegin(),(a).rend() // reverse range
 #define isin(x,l,r) ((l) <= (x) && (x) < (r))
 #define ru(x,y) (((x)+(y)-1)/(y)) // round up
@@ -27,30 +29,52 @@ template<typename T> void Yes(T flag) {
   cout << (flag ? "Yes" : "No") << endl;
 }
 
-ostream& operator<<(ostream& os, const P& p) { return os << "<" << p.fi << ","<< p.se << ">";}
-
-template<typename T>
-ostream& operator<<(ostream& os, const vector<T>& vec) {
-  os << "[";
-  for (int i = 0; i < (int)vec.size(); ++i)
-  {
-    cout << (i > 0 ? ", " : "") << vec.at(i);
-  }
-  os << "]";
-  return os;
+template<typename T> void pv(vector<T> vec) {
+  cout << "[";
+  for(auto& v : vec) { cout << v << ","; }
+  cout << "]" << endl;
 }
 
-template<typename T>
-ostream& operator<<(ostream& os, const vector<vector<T>>& vec) {
-  os << "[";
+template<>
+void pv(vector<P> vec) {
+  cout << "[";
   for(auto& v : vec) {
-    os << v << (vec.back() != v ? "," : "");
+    cout << "<" << v.fi << ","<< v.se << ">" << ",";
   }
-  os << "]";
-  return os;
+  cout << "]" << endl;
+}
+
+template<typename T> void pv2(vector<vector<T>> vec) {
+  for(auto& v : vec) pv(v);
+}
+
+string s(int a, int b) {
+  return to_string(a) + "-" + to_string(b);
 }
 
 int main() {
+  int n,k; cin >> n >> k;
+  if(k==1) {
+    Yes(k == 1);
+    return 0;
+  }
+  vi a(n);
+  map<string,int> m;
+
+  rep(i,n) {
+    cin >> a.at(i);
+    m[s(a.at(i), i % k)] += 1;
+  }
+
+  sort(rng(a));
+  rep(i, n) {
+    m[s(a.at(i), i % k)] -=1;
+    if(m[s(a.at(i), i % k)] < 0) {
+      cout << "No" << endl;
+      return 0;
+    }
+  }
+  cout << "Yes" << endl;
 
   return 0;
 }

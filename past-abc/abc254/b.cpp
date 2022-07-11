@@ -49,6 +49,19 @@ template<typename T> void pv2(vector<vector<T>> vec) {
 }
 
 int main() {
+  int n; cin >> n;
+  vvi a = vvi(40, vi(100, 0));
+
+  orep(i,n) {
+    a.at(i).at(0) = 1;
+    orep(j, i-1) a.at(i).at(j) = a.at(i-1).at(j-1) + a.at(i-1).at(j);
+    a.at(i).at(i-1) = 1;
+  }
+
+  orep(i, n) {
+    rep(j, i) cout << a.at(i).at(j) << " ";
+    cout << endl;
+  }
 
   return 0;
 }

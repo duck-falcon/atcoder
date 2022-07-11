@@ -47,8 +47,42 @@ void pv(vector<P> vec) {
 template<typename T> void pv2(vector<vector<T>> vec) {
   for(auto& v : vec) pv(v);
 }
+const int INF = 1001001011;
 
 int main() {
+
+  ll n; cin >> n;
+  vi sq = vi(n+5, INF);
+  orep(i, n) {
+    if(i * i > n) break;
+    sq.at(i) = i * i;
+  }
+  sq.at(0) = 0;
+
+  ll ans = 0;
+  vl koku = vl(n+5, 1);
+  orep(i,n) koku.at(i) = i;
+
+  drep(i, n) {
+    orep(j, n) {
+      if(sq.at(i)*j > n) break;
+      koku.at(sq.at(i)*j) = min(koku.at(sq.at(i)*j), j);
+    }
+  }
+
+  orep(i, n) {
+    /*ll t = i;
+    drep(i, n) {
+      if(sq.at(i) == 0) break;
+      if(t % sq.at(i) == 0) {
+        t /= sq.at(i);
+        break;
+      }
+    }
+    ans += upper_bound(rng(sq), n / t) - sq.begin() -1;*/
+    ans += upper_bound(rng(sq), n / koku.at(i)) - sq.begin() -1;
+  }
+  cout << ans << endl;
 
   return 0;
 }
